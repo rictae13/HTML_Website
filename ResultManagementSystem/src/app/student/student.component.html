@@ -1,0 +1,91 @@
+<nav class="navbar navbar-light bg-dark">
+  <div class="container-fluid">
+    <h2 class="text-light primary py-3 ">Result Management System</h2>
+    <div class="d-flex">
+      <button class="btn btn-success" (click)="add()" data-bs-toggle="modal" data-bs-target="#exampleModal">Add
+        Student</button>&nbsp;
+      <button routerLink="/login" class="btn btn-warning">Logout</button>
+    </div>
+  </div>
+</nav>
+
+<!-- table -->
+<table class="table mt-4">
+  <thead>
+    <tr>
+      <th scope="col">Roll no</th>
+      <th scope="col">Name</th>
+      <th scope="col">Date of Birth</th>
+      <th scope="col">Score</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of allStudentData">
+      <td>{{data.rollno}}</td>
+      <td>{{data.name}}</td>
+      <td>{{data.dob}}</td>
+      <td>{{data.score}}</td>
+      <td>
+        <button class="btn btn-info" (click)="edit(data)" data-bs-toggle="modal"
+          data-bs-target="#exampleModal">Edit</button>&nbsp;
+        <button class="btn btn-danger" (click)="deleteStudent(data)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div style="background: black;" class="modal-header">
+        <h5 style="color: aliceblue;font-size: 20px;margin-left: 62px;font-weight: 620;" class="modal-title"
+          id="exampleModalLabel">Result Management System</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formValue">
+          <div class="form-group">
+            <label for="rollno">Roll no</label>
+            <input type="text" formControlName="rollno" class="form-control" id="rollno" aria-describedby="emailHelp"
+              placeholder="Enter roll no">
+            <small *ngIf="formValue.get('rollno')?.invalid && formValue.get('rollno')?.touched" class="text-danger">Roll
+              number required</small>
+          </div>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" formControlName="name" class="form-control" id="name" aria-describedby="emailHelp"
+              placeholder="Enter name">
+            <small *ngIf="formValue.get('name')?.invalid && formValue.get('name')?.touched" class="text-danger">Name
+              required</small>
+          </div>
+          <div class="form-group">
+            <label for="dob">Date of Birth</label>
+            <input type="date" formControlName="dob" class="form-control" id="dob" aria-describedby="emailHelp"
+              placeholder="Enter date of birth">
+            <small *ngIf="formValue.get('dob')?.invalid && formValue.get('dob')?.touched" class="text-danger">Date of
+              Birth required</small>
+          </div>
+          <div class="form-group">
+            <label for="score">Score</label>
+            <input type="text" formControlName="score" class="form-control" id="score" aria-describedby="emailHelp"
+              placeholder="Enter score">
+            <small *ngIf="formValue.get('score')?.invalid && formValue.get('score')?.touched" class="text-danger">Score
+              required</small>
+          </div>
+        </form>
+      </div>
+      <div style="background: rgb(47, 40, 40);" class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+        <button *ngIf="showadd" type="button" (click)="addStudent()" [disabled]="formValue.invalid"
+          class="btn btn-success">Add</button>
+        <button *ngIf="showupdate" type="button" (click)="update()" class="btn btn-success">Update</button>
+      </div>
+    </div>
+  </div>
+</div>

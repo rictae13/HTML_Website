@@ -1,0 +1,56 @@
+<nav class="navbar navbar-light bg-dark">
+  <div class="container-fluid " style=" justify-content: center;">
+    <h2 class="text-light primary py-3">Result Management System</h2>
+  </div>
+</nav>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="text-center">
+          <h1>Student Result Dashboard</h1>
+        </div>
+        <form [formGroup]="searchForm" (ngSubmit)="search()">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Roll number</label>
+            <input type="text" formControlName="rollno" class="form-control" id="exampleInputEmail1"
+              aria-describedby="emailHelp" placeholder="Enter roll number">
+            <small *ngIf="searchForm.get('rollno')?.invalid && searchForm.get('rollno')?.touched"
+              class="text-danger">Roll number is required</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Date of Birth</label>
+            <input type="date" formControlName="dob" class="form-control" id="exampleInputPassword1"
+              placeholder="Enter date of birth">
+            <small *ngIf="searchForm.get('dob')?.invalid && searchForm.get('dob')?.touched" class="text-danger">Date of
+              Birth is required</small>
+          </div>
+          <button type="submit" [disabled]="searchForm.invalid" class="btn btn-primary">Search</button>
+        </form>
+
+        <h5>Your result will show here...</h5>
+        <!-- table -->
+        <table style="border: 1px;" class="table mt-4">
+          <thead>
+            <tr>
+              <th scope="col">Roll no</th>
+              <th scope="col">Name</th>
+              <th scope="col">Date of Birth</th>
+              <th scope="col">Score</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{this.particularStudentData[0].rollno}}</td>
+              <td>{{this.particularStudentData[0].name}}</td>
+              <td>{{this.particularStudentData[0].dob}}</td>
+              <td>{{this.particularStudentData[0].score}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <a class="btn btn-primary" style="width: fit-content; text-align: center;" routerLink="/home">Back to home</a>
+      </div>
+    </div>
+  </div>
+</div>
